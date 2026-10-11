@@ -1,0 +1,14 @@
+# Normalize line endings on commit.
+* text=auto eol=lf
+
+# Windows batch files must keep CRLF.
+*.bat text eol=crlf
+
+# Shell scripts must keep LF or they break on Linux/macOS.
+*.sh text eol=lf
+
+# Binary assets — never touch.
+*.png binary
+*.jpg binary
+*.zip binary
+*.exe binary

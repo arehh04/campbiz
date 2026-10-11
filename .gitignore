@@ -1,0 +1,30 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Logs
+*.log
+
+# Local-only config / secrets — never commit real credentials
+.campusbiz-bridge.json
+.env
+.env.*
+
+# Agent tooling
+.claude/
+.codebuddy-plugin/.pending-preview-session

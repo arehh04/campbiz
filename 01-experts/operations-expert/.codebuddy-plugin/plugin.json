@@ -1,0 +1,43 @@
+{
+  "name": "operations-expert",
+  "version": "1.0.0",
+  "description": "Daily operations planner for micro-businesses that respects capacity limits and returns structured plans.",
+  "author": {
+    "name": "WorkBuddy AI",
+    "email": "support@workbuddy.ai"
+  },
+  "agents": ["./agents/operations-expert.md"],
+
+  "expertType": "agent",
+  "agentName": "operations-expert",
+
+  "displayName": {
+    "en": "Operations Planner",
+    "zh": "运营计划专家"
+  },
+  "profession": {
+    "en": "Operations Planner",
+    "zh": "日常运营规划师"
+  },
+  "displayDescription": {
+    "en": "Micro-business operations planner: builds daily plans within capacity, with prep quantity, cutoff time and fulfillment window.",
+    "zh": "为小微企业制定每日运营计划，严守产能上限，输出备货量、接单截止与履约窗口等结构化清单。"
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "zh": "根据我的产能帮我制定今天的运营计划",
+    "en": "Help me build today's operations plan based on my capacity."
+  },
+  "plugin": "operations-expert",
+  "tags": [
+    { "en": "Daily Operations", "zh": "每日运营计划" },
+    { "en": "Capacity Control", "zh": "产能管控" },
+    { "en": "Fulfillment Scheduling", "zh": "履约排程" }
+  ],
+  "quickPrompts": [
+    { "en": "Help me build today's operations plan based on my capacity", "zh": "根据我的产能帮我制定今天的运营计划" },
+    { "en": "How much should I prep and what is the order cutoff", "zh": "告诉我每天该备多少货、几点截单" },
+    { "en": "Output daily tasks and fulfillment window as JSON", "zh": "用 JSON 输出每日任务与履约窗口" }
+  ]
+}

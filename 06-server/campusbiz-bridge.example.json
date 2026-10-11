@@ -1,0 +1,17 @@
+{
+  "_comment": "CampusBiz bridge config. Copy to ~/.campusbiz-bridge.json and edit. Env vars override these.",
+  "port": 3333,
+
+  "_mode_A_cli": "Point workbuddyCli at the CLI bundled with WorkBuddy. No API key needed.",
+  "workbuddyCli": "C:/Users/HP/AppData/Local/Programs/WorkBuddyAI/resources/app.asar.unpacked/cli/bin/codebuddy",
+  "cliFlavor": "codebuddy",
+  "agentName": "campusbiz-orchestrator",
+  "outputDir": "~/campusbiz-output/",
+  "extraCliArgs": [],
+
+  "_mode_B_api": "Alternative: point at a running 'codebuddy --serve' instance. Leave blank to skip.",
+  "workbuddyApiBase": "",
+  "workbuddyApiKey": "",
+
+  "allowDemo": true
+}

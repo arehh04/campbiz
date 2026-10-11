@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>小灶手作饼干 · 当日现烤 · 宿舍楼直达</title>
+<style>
+  :root{
+    --bg:#FFF8F0;
+    --card:#FFFFFF;
+    --ink:#3A2A1E;
+    --muted:#8A7566;
+    --brand:#8B5A2B;
+    --brand-dark:#6F4520;
+    --caramel:#D98E3F;
+    --caramel-soft:#F6E3CC;
+    --cream:#FFF1DE;
+    --line:#F0E2CE;
+    --radius:20px;
+    --ok:#2E7D5B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    padding-bottom:calc(96px + env(safe-area-inset-bottom));
+  }
+  .wrap{max-width:560px;margin:0 auto;padding:0 0 10px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(circle at 82% 12%, rgba(255,255,255,.35), transparent 42%),
+      linear-gradient(150deg,#7A4A22 0%,#A9672E 46%,#D98E3F 100%);
+    color:#fff;
+    padding:34px 22px 110px;
+    overflow:hidden;
+  }
+  .hero .brand{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:12px;letter-spacing:.22em;font-weight:700;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);
+    padding:5px 12px;border-radius:999px;
+  }
+  .hero h1{
+    font-size:31px;line-height:1.28;font-weight:900;margin:16px 0 12px;letter-spacing:.5px;
+    text-shadow:0 2px 12px rgba(60,30,5,.28);
+  }
+  .hero h1 em{font-style:normal;color:#FFE1B8;}
+  .hero p.sub{font-size:15px;opacity:.95;max-width:330px;}
+  .hero .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .hero .badges span{
+    font-size:12.5px;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.3);
+    padding:5px 11px;border-radius:999px;font-weight:600;
+  }
+  .cookie-emoji{
+    position:absolute;right:-6px;bottom:66px;font-size:104px;
+    opacity:.9;filter:drop-shadow(0 12px 22px rgba(60,30,5,.35));
+    transform:rotate(-10deg);
+    animation:float 4.6s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:rotate(-10deg) translateY(0)}50%{transform:rotate(-6deg) translateY(-12px)}}
+  .hero-wave{position:absolute;left:0;right:0;bottom:-1px;height:52px;}
+  .hero-wave svg{width:100%;height:100%;display:block;}
+
+  /* ---------- TICKER ---------- */
+  .ticker{
+    background:var(--brand-dark);color:#FFEBCF;
+    font-size:13px;font-weight:600;
+    padding:9px 18px;text-align:center;letter-spacing:.3px;
+  }
+  .ticker b{color:#FFC87A;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:0 18px;}
+  .sec-title{
+    display:flex;align-items:center;gap:9px;
+    font-size:19px;font-weight:900;margin:26px 0 13px;letter-spacing:.3px;
+  }
+  .sec-title::before{
+    content:"";width:5px;height:19px;border-radius:3px;
+    background:linear-gradient(var(--caramel),var(--brand));
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:19px;
+    box-shadow:0 3px 14px rgba(139,90,43,.06);
+  }
+
+  /* 卖点 */
+  .sells{display:grid;gap:11px;}
+  .sell{
+    display:flex;gap:13px;align-items:flex-start;
+    background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:15px;
+    box-shadow:0 2px 10px rgba(139,90,43,.05);
+  }
+  .sell .ico{
+    flex:0 0 auto;width:42px;height:42px;border-radius:13px;
+    display:grid;place-items:center;font-size:21px;
+    background:linear-gradient(145deg,#FBEAD3,#F3D6AE);
+  }
+  .sell h3{font-size:15px;font-weight:800;margin-bottom:3px;}
+  .sell p{font-size:13px;color:var(--muted);line-height:1.55;}
+
+  /* 价格 */
+  .price-card{
+    background:linear-gradient(160deg,#FFFFFF 0%,#FFF4E4 100%);
+    border:1.5px solid #EFD6B4;border-radius:var(--radius);
+    padding:20px;box-shadow:0 6px 22px rgba(217,142,63,.13);
+  }
+  .price-card .lead{font-size:13px;color:var(--muted);font-weight:600;}
+  .price-main{display:flex;align-items:baseline;gap:9px;margin:6px 0 3px;flex-wrap:wrap;}
+  .price-main .num{font-size:46px;font-weight:900;color:var(--brand);line-height:1;}
+  .price-main .unit{font-size:15px;font-weight:700;color:var(--brand);}
+  .price-main .tag{
+    font-size:11.5px;font-weight:700;color:#fff;
+    background:var(--caramel);padding:3px 9px;border-radius:999px;
+  }
+  .plans{display:grid;gap:11px;margin-top:16px;}
+  .plan{
+    display:flex;justify-content:space-between;align-items:center;
+    border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;
+    background:#fff;position:relative;transition:.18s;
+  }
+  .plan.hot{border-color:var(--caramel);background:linear-gradient(120deg,#FFFaf2,#FFF3E1);}
+  .plan .left h4{font-size:15px;font-weight:800;display:flex;align-items:center;gap:7px;}
+  .plan .left small{display:block;font-size:12px;color:var(--muted);margin-top:2px;}
+  .plan .right{text-align:right;white-space:nowrap;}
+  .plan .right .p{font-size:20px;font-weight:900;color:var(--brand);}
+  .plan .right .per{display:block;font-size:11.5px;color:var(--muted);}
+  .flag{
+    font-size:10.5px;font-weight:800;color:#fff;background:#D9534F;
+    padding:2px 7px;border-radius:999px;letter-spacing:.3px;
+  }
+  .price-foot{
+    margin-top:14px;font-size:12.5px;color:var(--muted);
+    background:var(--caramel-soft);border-radius:12px;padding:10px 13px;
+  }
+
+  /* 时间说明 */
+  .meta-grid{display:grid;gap:1px;background:var(--line);border-radius:16px;overflow:hidden;border:1px solid var(--line);}
+  .meta-row{display:flex;gap:12px;background:#fff;padding:14px 16px;font-size:14px;}
+  .meta-row .k{flex:0 0 96px;color:var(--muted);font-weight:600;}
+  .meta-row .v{color:var(--ink);font-weight:700;}
+  .meta-row .v small{display:block;font-weight:500;color:var(--muted);font-size:12px;margin-top:2px;}
+  .meta-row.cut .k{color:#C0392B;}
+
+  /* 稀缺 */
+  .scarce{
+    margin-top:16px;border-radius:var(--radius);padding:18px;
+    background:linear-gradient(140deg,#4A2E17,#7A4A22);
+    color:#FFE9CE;position:relative;overflow:hidden;
+    box-shadow:0 8px 24px rgba(74,46,23,.21);
+  }
+  .scarce h3{font-size:16px;font-weight:900;color:#FFD79A;margin-bottom:7px;}
+  .scarce p{font-size:13.5px;line-height:1.7;opacity:.95;}
+  .scarce .bar{
+    margin-top:13px;height:9px;border-radius:999px;
+    background:rgba(255,255,255,.18);overflow:hidden;
+  }
+  .scarce .bar i{
+    display:block;height:100%;width:82%;border-radius:999px;
+    background:linear-gradient(90deg,#FFC87A,#D98E3F);
+  }
+  .scarce .bar-txt{font-size:12px;margin-top:7px;color:#FFD79A;font-weight:700;}
+  .scarce .cookie-bg{position:absolute;right:-14px;bottom:-18px;font-size:86px;opacity:.14;}
+
+  /* 信任 */
+  .trust{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+  .trust .t{
+    background:#fff;border:1px solid var(--line);border-radius:15px;
+    padding:14px;text-align:center;box-shadow:0 2px 9px rgba(139,90,43,.05);
+  }
+  .trust .t .e{font-size:24px;}
+  .trust .t .l{font-size:13px;font-weight:800;margin-top:5px;}
+  .trust .t .s{font-size:11.5px;color:var(--muted);margin-top:2px;}
+
+  /* 评价 */
+  .reviews{display:grid;gap:11px;}
+  .review{
+    background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px 15px;
+    box-shadow:0 2px 9px rgba(139,90,43,.05);
+  }
+  .review .stars{font-size:12px;color:#E8A33D;letter-spacing:1px;}
+  .review .txt{font-size:13.5px;margin:6px 0 7px;line-height:1.6;}
+  .review .who{font-size:11.5px;color:var(--muted);}
+
+  /* FAQ */
+  details{
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:13px 15px;margin-bottom:9px;
+  }
+  details[open]{border-color:#EAD3B2;}
+  summary{
+    font-size:14px;font-weight:800;cursor:pointer;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"＋";color:var(--caramel);font-weight:900;}
+  details[open] summary::after{content:"－";}
+  details p{font-size:13px;color:var(--muted);margin-top:9px;line-height:1.65;}
+
+  footer{
+    text-align:center;color:var(--muted);font-size:12px;
+    margin-top:30px;padding:0 24px;line-height:1.8;
+  }
+
+  /* CTA */
+  .cta-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:50;
+    background:rgba(255,248,240,.94);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);
+    padding:11px 18px calc(12px + env(safe-area-inset-bottom));
+  }
+  .cta-inner{max-width:560px;margin:0 auto;display:flex;gap:11px;align-items:center;}
+  .cta-info{flex:0 0 auto;}
+  .cta-info .p{font-size:19px;font-weight:900;color:var(--brand);line-height:1.1;}
+  .cta-info .s{font-size:11px;color:var(--muted);}
+  .btn{
+    flex:1;display:block;text-align:center;text-decoration:none;
+    background:linear-gradient(135deg,#A9672E,#8B5A2B);
+    color:#fff;border:none;border-radius:15px;
+    padding:15px 12px;font-size:16.5px;font-weight:800;
+    letter-spacing:.5px;cursor:pointer;
+    box-shadow:0 6px 18px rgba(139,90,43,.32);
+    transition:transform .13s ease,box-shadow .13s ease;
+  }
+  .btn:active{transform:scale(.975);box-shadow:0 3px 10px rgba(139,90,43,.3);}
+  .pulse{animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 6px 18px rgba(139,90,43,.32)}50%{box-shadow:0 6px 26px rgba(217,142,63,.55)}}
+
+  @media(min-width:620px){
+    .hero{padding:40px 30px 120px;}
+    .hero h1{font-size:36px;}
+    section{padding:0 24px;}
+    .sells{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="brand">🍪 小灶手作 · CAMPUS BAKERY</span>
+    <h1>当日现烤的<br><em>手作黄油曲奇</em></h1>
+    <p class="sub">宿舍楼下就能吃到刚出炉的饼干 · 每天限量 <b>40 个</b>，售完即止</p>
+    <div class="badges">
+      <span>🔥 当日现烤</span>
+      <span>🏠 宿舍楼直达</span>
+      <span>🧈 真黄油 · 零添加剂</span>
+      <span>⏰ 前一日 21:00 截单</span>
+    </div>
+    <div class="cookie-emoji">🍪</div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 560 52" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C120,58 260,4 380,24 C460,37 520,26 560,18 L560,52 L0,52 Z" fill="#FFF8F0"/>
+      </svg>
+    </div>
+  </header>
+
+  <div class="ticker">📣 今日订单已于<b>前一日 21:00</b>截止 · 明晚 <b>17:30–19:30</b> 晚餐档送到宿舍楼</div>
+
+  <!-- 卖点 -->
+  <section>
+    <h2 class="sec-title">为什么值得等这一口</h2>
+    <div class="sells">
+      <div class="sell">
+        <div class="ico">🔥</div>
+        <div>
+          <h3>下单后才开烤</h3>
+          <p>按你的订单当天现做，不是预包装货架饼干。拿到手还是温的，边缘微脆、中心软糯。</p>
+        </div>
+      </div>
+      <div class="sell">
+        <div class="ico">🧈</div>
+        <div>
+          <h3>配料表就三行</h3>
+          <p>黄油、低筋面粉、糖 —— 看得懂的配料。真黄油开酥，室温化开的香气骗不了人。</p>
+        </div>
+      </div>
+      <div class="sell">
+        <div class="ico">🏠</div>
+        <div>
+          <h3>送到你宿舍楼下</h3>
+          <p>不用跑远，不用等外卖。晚餐档/午间档定点配送，一个宿舍楼统一送达。</p>
+        </div>
+      </div>
+      <div class="sell">
+        <div class="ico">⏳</div>
+        <div>
+          <h3>每天只做 40 个</h3>
+          <p>小灶产能有上限，工作日 40 个封顶。抢不到就等明天 —— 这是限量，不是套路。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 价格 -->
+  <section>
+    <h2 class="sec-title">价格 & 套餐</h2>
+    <div class="price-card">
+      <div class="lead">单只尝鲜价</div>
+      <div class="price-main">
+        <span class="num">¥6</span>
+        <span class="unit">/ 个</span>
+        <span class="tag">现烤到手</span>
+      </div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:4px;">比一瓶奶茶便宜 · 当下午茶刚好</div>
+
+      <div class="plans">
+        <div class="plan">
+          <div class="left">
+            <h4>1 个装</h4>
+            <small>先尝个鲜，试试口味</small>
+          </div>
+          <div class="right"><span class="p">¥6</span><span class="per">¥6.0 / 个</span></div>
+        </div>
+
+        <div class="plan hot">
+          <div class="left">
+            <h4>2 个装 <span class="flag">免拼单</span></h4>
+            <small>自己一个 · 室友一个，一单抵两单</small>
+          </div>
+          <div class="right"><span class="p">¥12</span><span class="per">¥6.0 / 个</span></div>
+        </div>
+
+        <div class="plan">
+          <div class="left">
+            <h4>4 个装</h4>
+            <small>宿舍分着吃 / 小组自习续命装</small>
+          </div>
+          <div class="right"><span class="p">¥24</span><span class="per">¥6.0 / 个</span></div>
+        </div>
+
+        <div class="plan">
+          <div class="left">
+            <h4>加料款（单只）</h4>
+            <small>双倍巧克力豆 + 海盐碎，甜咸暴击</small>
+          </div>
+          <div class="right"><span class="p">¥7.5</span><span class="per">¥7.5 / 个</span></div>
+        </div>
+
+        <div class="plan">
+          <div class="left">
+            <h4>礼盒装 <span class="flag">送礼首选</span></h4>
+            <small>4 个经典款 + 2 个加料款，附带手写卡片</small>
+          </div>
+          <div class="right"><span class="p">¥39</span><span class="per">¥6.5 / 个 · 共 6 个</span></div>
+        </div>
+      </div>
+
+      <div class="price-foot">
+        💡 多买不加价 —— <b>每只始终 ¥6 起，量价同涨</b>。组合装的省心在于：<b>一次配送、免拼单、送礼更好看</b>，而不是靠压价。想拉高好吃度，直接上<b>加料款 ¥7.5</b>。
+      </div>
+    </div>
+  </section>
+
+  <!-- 时间说明 -->
+  <section>
+    <h2 class="sec-title">截单 & 配送时间</h2>
+    <div class="meta-grid">
+      <div class="meta-row cut">
+        <span class="k">截单时间</span>
+        <span class="v">前一日 21:00<small>周末订单请在周五 21:00 前下单</small></span>
+      </div>
+      <div class="meta-row">
+        <span class="k">工作日配送</span>
+        <span class="v">17:30 – 19:30<small>晚餐档 · 送到宿舍楼指定点</small></span>
+      </div>
+      <div class="meta-row">
+        <span class="k">周末配送</span>
+        <span class="v">12:00 – 13:30<small>午间档 · 周末只做 30 个</small></span>
+      </div>
+      <div class="meta-row">
+        <span class="k">自提方式</span>
+        <span class="v">也可到食堂摊位自提<small>按约定时段取货，无需等待</small></span>
+      </div>
+    </div>
+
+    <div class="scarce">
+      <div class="cookie-bg">🍪</div>
+      <h3>⚠️ 明日名额仅剩 8 个</h3>
+      <p>工作日每天只做 40 个，截单后不再追加。<br>现在下单锁定明天这一炉，晚了真的只能等后天。</p>
+      <div class="bar"><i></i></div>
+      <div class="bar-txt">今日已订 32 / 40</div>
+    </div>
+  </section>
+
+  <!-- 信任 -->
+  <section>
+    <h2 class="sec-title">吃得放心</h2>
+    <div class="trust">
+      <div class="t"><div class="e">👩‍🍳</div><div class="l">真人手作</div><div class="s">本地学生小灶出品</div></div>
+      <div class="t"><div class="e">🔥</div><div class="l">当日现烤</div><div class="s">不囤货 · 不隔夜</div></div>
+      <div class="t"><div class="e">🏠</div><div class="l">楼栋直达</div><div class="s">不用出宿舍楼取</div></div>
+      <div class="t"><div class="e">💬</div><div class="l">熟人口碑</div><div class="s">同学一句话就能核验</div></div>
+    </div>
+  </section>
+
+  <!-- 评价 -->
+  <section>
+    <h2 class="sec-title">同学怎么说</h2>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <div class="txt">“真的比想象中香，咬开还能看到没化开的巧克力豆。送到宿舍楼下不用下楼跑食堂，太合适晚自习回来吃。”</div>
+        <div class="who">— 3 号楼 · 大二 林同学</div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <div class="txt">“2 个装和室友分着买最顺，一人一个刚刚好。加了海盐那款咸甜口我直接锁死。”</div>
+        <div class="who">— 6 号楼 · 大三 陈同学</div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        <div class="txt">“好吃是真的，就是太抢手。第一次没抢到，第二次早早下了单。建议想吃的早点下单别拖到 9 点。”</div>
+        <div class="who">— 9 号楼 · 大一 赵同学</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <h2 class="sec-title">常见问题</h2>
+    <details open>
+      <summary>怎么下单？</summary>
+      <p>点页面底部「立即下单」按钮填写订货表单，提交后会生成你的订单信息，复制粘贴到微信群里发送即可完成下单。</p>
+    </details>
+    <details>
+      <summary>今天还能订到吗？</summary>
+      <p>每天 <b>前一日 21:00</b> 截单，工作日限量 40 个、周末 30 个。截单后订单顺延到下一个供应日，先到先得。</p>
+    </details>
+    <details>
+      <summary>能指定送达时间吗？</summary>
+      <p>配送按固定档期：工作日 17:30–19:30、周末 12:00–13:30。下单时选择自提或配送，我们会按档期统一送达。</p>
+    </details>
+    <details>
+      <summary>饼干能放多久？</summary>
+      <p>现烤无防腐，建议当天或次日吃完。密封常温可放 2–3 天，回烤箱 3 分钟能恢复现烤口感。</p>
+    </details>
+    <details>
+      <summary>可以拼宿舍楼团购吗？</summary>
+      <p>可以！多人要的话直接选 4 个装，一次配送、免拼单更省事。人数多的话在备注里写清楚各房号，我们按档期统一送达。</p>
+    </details>
+  </section>
+
+  <footer>
+    小灶手作 · 校园现烤曲奇<br>
+    前一日 21:00 截单 · 工作日 17:30–19:30 / 周末 12:00–13:30 送达<br>
+    本页面为本地演示文件，所有下单信息仅保存在你的设备上。
+  </footer>
+
+</div>
+
+<!-- 底部 CTA -->
+<div class="cta-bar">
+  <div class="cta-inner">
+    <div class="cta-info">
+      <div class="p">¥6<span style="font-size:13px;"> 起</span></div>
+      <div class="s">2个装 ¥12 · 免拼单</div>
+    </div>
+    <a class="btn pulse" href="order-form.html">立即下单 · 锁定明日名额</a>
+  </div>
+</div>
+
+<script>
+  // 平滑滚动兜底 & 轻微交互反馈（纯前端，无外部依赖）
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(this.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+    });
+  });
+</script>
+</body>
+</html>

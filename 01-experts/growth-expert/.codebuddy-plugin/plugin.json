@@ -1,0 +1,43 @@
+{
+  "name": "growth-expert",
+  "version": "1.0.0",
+  "description": "Launch-ready marketing asset creator that generates real files via the artifact-generator skill for micro-businesses.",
+  "author": {
+    "name": "WorkBuddy AI",
+    "email": "support@workbuddy.ai"
+  },
+  "agents": ["./agents/growth-expert.md"],
+
+  "expertType": "agent",
+  "agentName": "growth-expert",
+
+  "displayName": {
+    "en": "Growth Marketer",
+    "zh": "增长营销专家"
+  },
+  "profession": {
+    "en": "Growth Marketer",
+    "zh": "增长营销专家"
+  },
+  "displayDescription": {
+    "en": "Micro-business growth marketer: creates launch-ready marketing assets as real files, all claims aligned to the business plan.",
+    "zh": "为小微企业打造可即时投放的营销物料，调用生成器产出真实文件，所有卖点严格对齐商业计划。"
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "zh": "为我这个小生意生成一套可投放的营销物料",
+    "en": "Generate a launch-ready set of marketing assets for my small business."
+  },
+  "plugin": "growth-expert",
+  "tags": [
+    { "en": "Marketing Assets", "zh": "营销物料生成" },
+    { "en": "Launch Campaigns", "zh": "上市推广" },
+    { "en": "Brand Consistency", "zh": "品牌主张一致" }
+  ],
+  "quickPrompts": [
+    { "en": "Generate a launch-ready set of marketing assets for my small business", "zh": "为我这个小生意生成一套可投放的营销物料" },
+    { "en": "Make an opening-event poster and promo copy", "zh": "做一份开业活动海报和宣传文案" },
+    { "en": "Keep all claims consistent with my business plan", "zh": "确保所有营销主张与商业计划一致" }
+  ]
+}

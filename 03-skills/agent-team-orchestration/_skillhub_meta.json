@@ -1,0 +1,25 @@
+{
+  "name": "Agent Team Orchestration",
+  "installedAt": 1791607416094,
+  "source": "marketplace",
+  "version": "1.0.0",
+  "skillId": "skill_2053079579940413440",
+  "pay_mode": 0,
+  "examples_zh": [
+    "设计一个市场研究、写作、审校分工的多 Agent 流程",
+    "把产品调研任务拆给研究、分析和报告 Agent 并行处理",
+    "为代码开发、评审和测试设计多 Agent 交接规则",
+    "生成一个带人工审批节点的 Agent 协作流程"
+  ],
+  "examples_en": [
+    "Design a multi-agent workflow for market research, writing, and review",
+    "Split this product research task across research, analysis, and reporting agents",
+    "Create handoff rules for coding, review, and testing agents",
+    "Generate an agent workflow with human approval checkpoints"
+  ],
+  "description_zh": "多智能体团队编排：角色定义、任务流转、交接协议与质量门禁",
+  "description_en": "Orchestrate multi-agent teams with roles, task lifecycles, handoffs, and review workflows",
+  "iconSource": "https://openplatform-cdn.codebuddy.ai/public/operation-platform/skill-icons/skill_2053079579940413440/696da492b60fc2fb.png",
+  "iconLocalPath": "C:\\Users\\HP\\.workbuddy-ai\\skills\\agent-team-orchestration\\_icon.png",
+  "iconDownloadedFrom": "https://openplatform-cdn.codebuddy.ai/public/operation-platform/skill-icons/skill_2053079579940413440/696da492b60fc2fb.png"
+}

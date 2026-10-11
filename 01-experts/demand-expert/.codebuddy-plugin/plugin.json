@@ -1,0 +1,43 @@
+{
+  "name": "demand-expert",
+  "version": "1.0.0",
+  "description": "Market demand analyst that estimates daily demand from sales history and clearly labels simulated data.",
+  "author": {
+    "name": "WorkBuddy AI",
+    "email": "support@workbuddy.ai"
+  },
+  "agents": ["./agents/demand-expert.md"],
+
+  "expertType": "agent",
+  "agentName": "demand-expert",
+
+  "displayName": {
+    "en": "Demand Analyst",
+    "zh": "需求分析师"
+  },
+  "profession": {
+    "en": "Demand Analyst",
+    "zh": "市场需求分析师"
+  },
+  "displayDescription": {
+    "en": "Micro-business demand analyst: estimates daily demand from sales history, quantifies uncertainty, flags simulated data.",
+    "zh": "为小微企业分析市场真实需求，基于销售历史模拟测算日需求量与不确定性，并明确标注模拟数据来源。"
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "zh": "帮我估算这个新项目每天的潜在市场需求量",
+    "en": "Help me estimate the daily market demand for this new venture."
+  },
+  "plugin": "demand-expert",
+  "tags": [
+    { "en": "Demand Estimation", "zh": "市场需求分析" },
+    { "en": "Sales History Simulation", "zh": "销售历史模拟" },
+    { "en": "Uncertainty Quantification", "zh": "需求不确定性" }
+  ],
+  "quickPrompts": [
+    { "en": "Help me estimate the daily market demand for this new venture", "zh": "帮我估算这个新项目每天的潜在市场需求量" },
+    { "en": "Where are my likely customers and how stable is demand", "zh": "分析我的潜在客户在哪里、需求有多稳定" },
+    { "en": "Return a JSON with demand estimate and key assumptions", "zh": "用 JSON 给出需求估算与关键假设" }
+  ]
+}

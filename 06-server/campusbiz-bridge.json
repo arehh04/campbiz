@@ -1,0 +1,24 @@
+{
+  "_comment": "CampusBiz bridge config (ACTIVE). Env vars override these. Priority: openai > api > cli > demo.",
+
+  "port": 3333,
+  "host": "127.0.0.1",
+
+  "_mode_openai": "PREFERRED. workbuddy2api community wrapper on port 8787. Bypasses the WorkBuddy CLI entirely.",
+  "openaiBase": "http://127.0.0.1:8787/v1",
+  "openaiApiKey": "local",
+  "openaiModel": "auto",
+
+  "_mode_api": "Alternative: a running 'codebuddy --serve' instance. Leave blank when using openai mode.",
+  "workbuddyApiBase": "",
+  "workbuddyApiKey": "",
+
+  "_mode_cli": "Fallback only. The bundled CLI hangs standalone (see LINKING-WORKBUDDY.md).",
+  "workbuddyCli": "C:/Users/HP/AppData/Local/Programs/WorkBuddyAI/resources/app.asar.unpacked/cli/bin/codebuddy",
+  "cliFlavor": "codebuddy",
+  "agentName": "campusbiz-orchestrator",
+
+  "outputDir": "~/campusbiz-output/",
+  "extraCliArgs": [],
+  "allowDemo": true
+}

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>小灶手作饼干 · 订货表单</title>
+<style>
+  :root{
+    --bg:#FFF8F0;
+    --card:#FFFFFF;
+    --ink:#3A2A1E;
+    --muted:#8A7566;
+    --brand:#8B5A2B;
+    --brand-dark:#6F4520;
+    --caramel:#D98E3F;
+    --caramel-soft:#F6E3CC;
+    --cream:#FFF1DE;
+    --line:#F0E2CE;
+    --radius:20px;
+    --ok:#2E7D5B;
+    --err:#C0392B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;
+    padding-bottom:calc(96px + env(safe-area-inset-bottom));
+  }
+  .wrap{max-width:560px;margin:0 auto;padding:0 0 20px;}
+
+  /* 顶部 */
+  .topbar{
+    position:sticky;top:0;z-index:30;
+    background:linear-gradient(135deg,#7A4A22,#A9672E);
+    color:#fff;padding:14px 18px;
+    display:flex;align-items:center;gap:10px;
+    box-shadow:0 4px 16px rgba(74,46,23,.2);
+  }
+  .topbar a.back{
+    color:#FFE1B8;text-decoration:none;font-size:14px;font-weight:700;
+    white-space:nowrap;
+  }
+  .topbar .title{flex:1;text-align:center;font-size:16px;font-weight:800;letter-spacing:.5px;}
+  .topbar .sp{width:52px;}
+  .notice{
+    background:var(--brand-dark);color:#FFEBCF;font-size:12.5px;
+    padding:8px 18px;text-align:center;font-weight:600;
+  }
+  .notice b{color:#FFC87A;}
+
+  section{padding:0 18px;}
+  .sec-title{
+    display:flex;align-items:center;gap:9px;
+    font-size:16px;font-weight:900;margin:22px 0 12px;letter-spacing:.3px;
+  }
+  .sec-title::before{
+    content:"";width:5px;height:17px;border-radius:3px;
+    background:linear-gradient(var(--caramel),var(--brand));
+  }
+  .hint{font-size:12px;color:var(--muted);font-weight:500;}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:16px;
+    box-shadow:0 3px 14px rgba(139,90,43,.06);
+  }
+
+  /* 表单 */
+  .field{margin-bottom:16px;}
+  .field:last-child{margin-bottom:0;}
+  label.lb{
+    display:block;font-size:13.5px;font-weight:800;margin-bottom:7px;
+  }
+  label.lb .req{color:var(--err);margin-left:3px;}
+  label.lb .opt{color:var(--muted);font-weight:500;font-size:12px;margin-left:4px;}
+  input[type=text],input[type=tel],select,textarea{
+    width:100%;font-size:15px;font-family:inherit;color:var(--ink);
+    background:#FFFDFA;border:1.5px solid var(--line);
+    border-radius:13px;padding:12px 13px;outline:none;
+    transition:border-color .15s,box-shadow .15s;
+  }
+  input:focus,select:focus,textarea:focus{
+    border-color:var(--caramel);
+    box-shadow:0 0 0 3px rgba(217,142,63,.16);
+    background:#fff;
+  }
+  textarea{resize:vertical;min-height:66px;line-height:1.55;}
+  input.bad,select.bad,textarea.bad{border-color:var(--err);background:#FFF4F3;}
+  .errtip{font-size:12px;color:var(--err);margin-top:5px;display:none;}
+  .errtip.show{display:block;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+
+  /* 数量选择 */
+  .opts{display:grid;gap:10px;}
+  .opt{
+    display:flex;align-items:center;gap:12px;
+    border:1.5px solid var(--line);border-radius:14px;
+    padding:12px 14px;background:#FFFDFA;cursor:pointer;
+    transition:.15s;position:relative;
+  }
+  .opt:active{transform:scale(.99);}
+  .opt input{position:absolute;opacity:0;pointer-events:none;}
+  .opt .radio{
+    flex:0 0 auto;width:20px;height:20px;border-radius:50%;
+    border:2px solid #D9C7AE;display:grid;place-items:center;transition:.15s;
+  }
+  .opt .radio::after{
+    content:"";width:9px;height:9px;border-radius:50%;
+    background:#fff;transform:scale(0);transition:.15s;
+  }
+  .opt .info{flex:1;min-width:0;}
+  .opt .info h4{font-size:14.5px;font-weight:800;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .opt .info small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .opt .pr{text-align:right;white-space:nowrap;}
+  .opt .pr .p{font-size:17px;font-weight:900;color:var(--brand);}
+  .opt .pr .u{display:block;font-size:11px;color:var(--muted);}
+  .opt.sel{border-color:var(--caramel);background:linear-gradient(120deg,#FFFAF2,#FFF1DE);}
+  .opt.sel .radio{border-color:var(--caramel);background:var(--caramel);}
+  .opt.sel .radio::after{transform:scale(1);}
+  .flag{font-size:10px;font-weight:800;color:#fff;background:#D9534F;padding:2px 6px;border-radius:999px;}
+
+  /* 配送方式 */
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .seg .opt{justify-content:center;}
+  .seg .opt .info{flex:0 0 auto;}
+
+  /* 汇总条 */
+  .sum-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    background:rgba(255,248,240,.95);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);
+    padding:11px 18px calc(12px + env(safe-area-inset-bottom));
+  }
+  .sum-inner{max-width:560px;margin:0 auto;display:flex;gap:12px;align-items:center;}
+  .sum-info{flex:0 0 auto;}
+  .sum-info .lbl{font-size:11px;color:var(--muted);}
+  .sum-info .amt{font-size:23px;font-weight:900;color:var(--brand);line-height:1.05;}
+  .sum-info .qty{font-size:11px;color:var(--muted);}
+  .btn{
+    flex:1;display:block;text-align:center;text-decoration:none;
+    background:linear-gradient(135deg,#A9672E,#8B5A2B);
+    color:#fff;border:none;border-radius:15px;
+    padding:15px 12px;font-size:16.5px;font-weight:800;letter-spacing:.5px;
+    cursor:pointer;box-shadow:0 6px 18px rgba(139,90,43,.32);
+    transition:transform .13s,box-shadow .13s;font-family:inherit;
+  }
+  .btn:active{transform:scale(.975);}
+
+  /* 成功面板 */
+  .overlay{
+    position:fixed;inset:0;z-index:80;background:rgba(58,42,30,.55);
+    backdrop-filter:blur(3px);display:none;
+    align-items:flex-end;justify-content:center;
+  }
+  .overlay.show{display:flex;}
+  .sheet{
+    background:var(--bg);width:100%;max-width:560px;
+    max-height:92vh;overflow-y:auto;
+    border-radius:24px 24px 0 0;
+    padding:22px 20px calc(24px + env(safe-area-inset-bottom));
+    animation:up .28s ease;
+  }
+  @keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:translateY(0);opacity:1}}
+  .sheet .ok-head{text-align:center;margin-bottom:16px;}
+  .sheet .ok-head .ic{
+    width:58px;height:58px;border-radius:50%;margin:0 auto 10px;
+    background:linear-gradient(145deg,#E4F5EC,#BCE5D2);color:var(--ok);
+    display:grid;place-items:center;font-size:30px;
+  }
+  .sheet .ok-head h2{font-size:19px;font-weight:900;}
+  .sheet .ok-head p{font-size:13px;color:var(--muted);margin-top:5px;}
+
+  .recv{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:16px;margin-bottom:12px;
+  }
+  .recv h3{font-size:14px;font-weight:900;margin-bottom:11px;display:flex;align-items:center;gap:7px;}
+  .recv .line{
+    display:flex;justify-content:space-between;gap:14px;
+    font-size:13.5px;padding:7px 0;border-bottom:1px dashed var(--line);
+  }
+  .recv .line:last-child{border-bottom:none;}
+  .recv .line .k{color:var(--muted);flex:0 0 auto;}
+  .recv .line .v{font-weight:700;text-align:right;word-break:break-all;}
+  .recv .line.total .v{color:var(--brand);font-size:17px;font-weight:900;}
+
+  .warnbox{
+    background:var(--caramel-soft);border-radius:12px;padding:11px 13px;
+    font-size:12.5px;color:#7A4A22;margin-bottom:12px;line-height:1.65;
+  }
+  .warnbox b{color:#C0392B;}
+
+  .copybox{
+    background:#FFFDFA;border:1.5px dashed var(--caramel);
+    border-radius:14px;padding:13px;font-size:12.5px;
+    white-space:pre-wrap;line-height:1.7;color:#5A4331;
+    font-family:"SFMono-Regular",Consolas,"PingFang SC",monospace;
+    margin-bottom:12px;
+  }
+  .sheet-actions{display:grid;gap:10px;}
+  .btn-copy{
+    background:linear-gradient(135deg,#2E7D5B,#256349);box-shadow:0 6px 18px rgba(46,125,91,.3);
+  }
+  .btn-ghost{
+    background:#fff;color:var(--brand);border:1.5px solid var(--line);
+    box-shadow:none;
+  }
+  .btn-ghost:active{background:var(--cream);}
+  .copied-tip{
+    text-align:center;font-size:12.5px;color:var(--ok);font-weight:700;
+    margin-top:8px;opacity:0;transition:.2s;
+  }
+  .copied-tip.show{opacity:1;}
+
+  footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:26px;padding:0 24px;line-height:1.8;}
+</style>
+</head>
+<body>
+
+<!-- 顶栏 -->
+<div class="topbar">
+  <a class="back" href="landing-page.html">‹ 返回</a>
+  <div class="title">🍪 填写订货信息</div>
+  <div class="sp"></div>
+</div>
+<div class="notice">⏰ 前一日 <b>21:00</b> 截单 · 工作日 <b>17:30–19:30</b> / 周末 <b>12:00–13:30</b> 送达</div>
+
+<div class="wrap">
+
+  <form id="orderForm" novalidate>
+
+    <!-- 联系信息 -->
+    <section>
+      <h2 class="sec-title">联系信息</h2>
+      <div class="card">
+        <div class="field">
+          <label class="lb" for="name">姓名 / 昵称<span class="req">*</span></label>
+          <input type="text" id="name" name="name" placeholder="例如：3号楼 小林" autocomplete="name">
+          <div class="errtip" data-for="name">请填写姓名或昵称</div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label class="lb" for="dorm">宿舍楼<span class="req">*</span></label>
+            <input type="text" id="dorm" name="dorm" placeholder="如：3号楼">
+            <div class="errtip" data-for="dorm">请填写宿舍楼</div>
+          </div>
+          <div class="field">
+            <label class="lb" for="room">房间号<span class="req">*</span></label>
+            <input type="text" id="room" name="room" placeholder="如：512">
+            <div class="errtip" data-for="room">请填写房间号</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lb" for="contact">手机号 / 微信号<span class="req">*</span></label>
+          <input type="text" id="contact" name="contact" placeholder="用于联系配送，例如 138xxxx1234 或 wxid_xxx">
+          <div class="errtip" data-for="contact">请填写手机号或微信号</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 口味 -->
+    <section>
+      <h2 class="sec-title">口味选择<span class="hint">（单选）</span></h2>
+      <div class="card">
+        <div class="field">
+          <label class="lb" for="flavor">想要哪个口味？<span class="req">*</span></label>
+          <select id="flavor" name="flavor">
+            <option value="">— 请选择口味 —</option>
+            <option value="原味黄油">原味黄油（经典款）</option>
+            <option value="巧克力豆">巧克力豆（人气款）</option>
+            <option value="海盐焦糖">海盐焦糖（咸甜口）</option>
+            <option value="燕麦葡萄干">燕麦葡萄干（微健康）</option>
+          </select>
+          <div class="errtip" data-for="flavor">请选择口味</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 数量 -->
+    <section>
+      <h2 class="sec-title">选择规格 & 数量</h2>
+      <div class="opts">
+        <label class="opt" data-plan="1">
+          <input type="radio" name="plan" value="1">
+          <span class="radio"></span>
+          <span class="info">
+            <h4>1 个装</h4>
+            <small>先尝个鲜，试试口味</small>
+          </span>
+          <span class="pr"><span class="p">¥6</span><span class="u">/ 个</span></span>
+        </label>
+
+        <label class="opt" data-plan="2">
+          <input type="radio" name="plan" value="2">
+          <span class="radio"></span>
+          <span class="info">
+            <h4>2 个装 <span class="flag">免拼单</span></h4>
+            <small>自己一个 · 室友一个</small>
+          </span>
+          <span class="pr"><span class="p">¥12</span><span class="u">¥6.0 / 个</span></span>
+        </label>
+
+        <label class="opt" data-plan="4">
+          <input type="radio" name="plan" value="4">
+          <span class="radio"></span>
+          <span class="info">
+            <h4>4 个装</h4>
+            <small>宿舍分着吃 / 小组自习装</small>
+          </span>
+          <span class="pr"><span class="p">¥24</span><span class="u">¥6.0 / 个</span></span>
+        </label>
+
+        <label class="opt" data-plan="plus">
+          <input type="radio" name="plan" value="plus">
+          <span class="radio"></span>
+          <span class="info">
+            <h4>加料款（单只）</h4>
+            <small>双倍巧克力豆 + 海盐碎</small>
+          </span>
+          <span class="pr"><span class="p">¥7.5</span><span class="u">/ 个</span></span>
+        </label>
+
+        <label class="opt" data-plan="gift">
+          <input type="radio" name="plan" value="gift">
+          <span class="radio"></span>
+          <span class="info">
+            <h4>礼盒装 <span class="flag">送礼首选</span></h4>
+            <small>4 个经典款 + 2 个加料款 · 手写卡片</small>
+          </span>
+          <span class="pr"><span class="p">¥39</span><span class="u">¥6.5 / 个 · 共 6 个</span></span>
+        </label>
+      </div>
+
+      <div class="field" style="margin-top:14px;">
+        <label class="lb" for="qty">购买份数<span class="req">*</span><span class="opt">（几份上面对应的套餐）</span></label>
+        <select id="qty" name="qty">
+          <option value="1">1 份</option>
+          <option value="2">2 份</option>
+          <option value="3">3 份</option>
+          <option value="4">4 份</option>
+          <option value="5">5 份</option>
+          <option value="6">6 份</option>
+        </select>
+      </div>
+      <div class="errtip" data-for="plan" style="margin-top:2px;">请选择一个规格</div>
+    </section>
+
+    <!-- 取货方式 -->
+    <section>
+      <h2 class="sec-title">取货方式</h2>
+      <div class="card">
+        <div class="seg">
+          <label class="opt" data-ful="delivery">
+            <input type="radio" name="fulfill" value="配送">
+            <span class="radio"></span>
+            <span class="info"><h4>🏠 宿舍配送</h4></span>
+          </label>
+          <label class="opt" data-ful="pickup">
+            <input type="radio" name="fulfill" value="自提">
+            <span class="radio"></span>
+            <span class="info"><h4>🛒 食堂自提</h4></span>
+          </label>
+        </div>
+        <div class="errtip" data-for="fulfill" style="margin-top:9px;">请选择取货方式</div>
+
+        <div class="field" style="margin-top:15px;">
+          <label class="lb" for="slot">取货时段<span class="req">*</span></label>
+          <select id="slot" name="slot">
+            <option value="">— 请选择时段 —</option>
+            <option value="工作日 17:30–19:30（晚餐档）">工作日 17:30–19:30（晚餐档）</option>
+            <option value="周末 12:00–13:30（午间档）">周末 12:00–13:30（午间档）</option>
+          </select>
+          <div class="errtip" data-for="slot">请选择取货时段</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 备注 -->
+    <section>
+      <h2 class="sec-title">备注 <span class="hint">（选填）</span></h2>
+      <div class="card">
+        <textarea id="note" name="note" placeholder="例如：希望 18:00 后送达 / 和室友拼单一起送 / 不要坚果…"></textarea>
+      </div>
+    </section>
+
+    <footer>
+      小灶手作 · 校园现烤曲奇 · 前一日 21:00 截单<br>
+      本页面为本地演示文件，提交后订单信息仅保存在你当前设备上，需手动复制到微信群发送。
+    </footer>
+
+  </form>
+</div>
+
+<!-- 底部汇总 + 提交 -->
+<div class="sum-bar">
+  <div class="sum-inner">
+    <div class="sum-info">
+      <div class="lbl">合计</div>
+      <div class="amt" id="liveTotal">¥0</div>
+      <div class="qty" id="liveQty">未选择</div>
+    </div>
+    <button class="btn" id="submitBtn" type="button">提交订单</button>
+  </div>
+</div>
+
+<!-- 成功面板 -->
+<div class="overlay" id="overlay">
+  <div class="sheet" role="dialog" aria-modal="true">
+    <div class="ok-head">
+      <div class="ic">✓</div>
+      <h2>订单已生成</h2>
+      <p>请复制下方订单信息，粘贴到微信群发给店主完成下单</p>
+    </div>
+
+    <div class="warnbox">
+      ⏰ 请确认你的订单在<b>前一日 21:00 前</b>发送给店主，逾期将顺延至下一个供应日。<br>
+      工作日配送 <b>17:30–19:30</b>，周末配送 <b>12:00–13:30</b>。
+    </div>
+
+    <div class="recv" id="recvBox">
+      <h3>📋 订单详情</h3>
+      <div class="line"><span class="k">姓名/昵称</span><span class="v" id="r-name">—</span></div>
+      <div class="line"><span class="k">宿舍楼</span><span class="v" id="r-dorm">—</span></div>
+      <div class="line"><span class="k">取货方式</span><span class="v" id="r-ful">—</span></div>
+      <div class="line"><span class="k">口味</span><span class="v" id="r-flavor">—</span></div>
+      <div class="line"><span class="k">规格</span><span class="v" id="r-plan">—</span></div>
+      <div class="line"><span class="k">份数</span><span class="v" id="r-qty">—</span></div>
+      <div class="line"><span class="k">取货时段</span><span class="v" id="r-slot">—</span></div>
+      <div class="line"><span class="k">联系方式</span><span class="v" id="r-contact">—</span></div>
+      <div class="line"><span class="k">备注</span><span class="v" id="r-note">—</span></div>
+      <div class="line total"><span class="k">合计金额</span><span class="v" id="r-total">¥0</span></div>
+    </div>
+
+    <div class="copybox" id="copyText">—</div>
+
+    <div class="sheet-actions">
+      <button class="btn btn-copy" id="copyBtn" type="button">📋 复制订单信息</button>
+      <button class="btn btn-ghost" id="editBtn" type="button">返回修改</button>
+      <button class="btn btn-ghost" id="againBtn" type="button">再下一单</button>
+    </div>
+    <div class="copied-tip" id="copiedTip">✓ 已复制，快去微信群粘贴发送吧！</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- 规格价格表（与落地页一致） ---------- */
+  var PLANS = {
+    "1":    { label:"1 个装",        price:6,    per:"¥6.0 / 个",   count:1 },
+    "2":    { label:"2 个装",        price:12,   per:"¥6.0 / 个",   count:2 },
+    "4":    { label:"4 个装",        price:24,   per:"¥6.0 / 个",   count:4 },
+    "plus": { label:"加料款（单只）", price:7.5,  per:"¥7.5 / 个",   count:1 },
+    "gift": { label:"礼盒装",        price:39,   per:"¥6.5 / 个",   count:6 }
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+  var form = $("orderForm");
+
+  function money(n){
+    // 保留两位，整数则不带小数
+    return "¥" + (Math.round(n*100)/100).toString();
+  }
+
+  function getPlan(){
+    var el = form.querySelector('input[name="plan"]:checked');
+    return el ? el.value : null;
+  }
+
+  function calcTotal(){
+    var plan = getPlan();
+    var qty = parseInt($("qty").value,10) || 1;
+    if(!plan) return { total:0, qty:qty, plan:null };
+    var total = PLANS[plan].price * qty;
+    return { total: total, qty: qty, plan: plan };
+  }
+
+  /* ---------- 实时刷新合计 ---------- */
+  function refresh(){
+    var r = calcTotal();
+    $("liveTotal").textContent = money(r.total);
+    if(!r.plan){
+      $("liveQty").textContent = "未选择规格";
+    } else {
+      var p = PLANS[r.plan];
+      $("liveQty").textContent = p.label + " × " + r.qty + " 份（共 " + (p.count*r.qty) + " 个）";
+    }
+  }
+
+  /* ---------- 规格选择高亮 ---------- */
+  form.querySelectorAll('.opt[data-plan]').forEach(function(el){
+    var input = el.querySelector("input");
+    input.addEventListener("change", function(){
+      form.querySelectorAll('.opt[data-plan]').forEach(function(o){ o.classList.remove("sel"); });
+      el.classList.add("sel");
+      clearErr("plan");
+      refresh();
+    });
+  });
+
+  /* ---------- 取货方式高亮 ---------- */
+  form.querySelectorAll('.opt[data-ful]').forEach(function(el){
+    var input = el.querySelector("input");
+    input.addEventListener("change", function(){
+      form.querySelectorAll('.opt[data-ful]').forEach(function(o){ o.classList.remove("sel"); });
+      el.classList.add("sel");
+      clearErr("fulfill");
+    });
+  });
+
+  /* ---------- 份数变化 ---------- */
+  $("qty").addEventListener("change", refresh);
+
+  /* ---------- 错误提示工具 ---------- */
+  function showErr(field){
+    var tip = document.querySelector('.errtip[data-for="'+field+'"]');
+    if(tip) tip.classList.add("show");
+  }
+  function clearErr(field){
+    var tip = document.querySelector('.errtip[data-for="'+field+'"]');
+    if(tip) tip.classList.remove("show");
+  }
+
+  /* 输入时清除错误 */
+  ["name","dorm","room","contact","flavor","slot"].forEach(function(id){
+    var el = $(id);
+    el.addEventListener("input", function(){
+      el.classList.remove("bad");
+      clearErr(id);
+    });
+    el.addEventListener("change", function(){
+      el.classList.remove("bad");
+      clearErr(id);
+    });
+  });
+
+  /* ---------- 校验 ---------- */
+  function validate(){
+    var ok = true, firstBad = null;
+
+    function check(id, cond){
+      var el = $(id);
+      if(!cond){
+        el.classList.add("bad");
+        showErr(id);
+        ok = false;
+        if(!firstBad) firstBad = el;
+      } else {
+        el.classList.remove("bad");
+        clearErr(id);
+      }
+    }
+
+    check("name",    $("name").value.trim().length > 0);
+    check("dorm",    $("dorm").value.trim().length > 0);
+    check("room",    $("room").value.trim().length > 0);
+    check("contact", $("contact").value.trim().length > 0);
+    check("flavor",  $("flavor").value !== "");
+    check("slot",    $("slot").value !== "");
+
+    // 规格（radio）
+    if(!getPlan()){
+      showErr("plan");
+      ok = false;
+      if(!firstBad) firstBad = form.querySelector('.opt[data-plan]');
+    } else {
+      clearErr("plan");
+    }
+
+    // 取货方式（radio）
+    if(!form.querySelector('input[name="fulfill"]:checked')){
+      showErr("fulfill");
+      ok = false;
+      if(!firstBad) firstBad = form.querySelector('.opt[data-ful]');
+    } else {
+      clearErr("fulfill");
+    }
+
+    if(!ok && firstBad){
+      firstBad.scrollIntoView({behavior:"smooth", block:"center"});
+      if(firstBad.focus) setTimeout(function(){ firstBad.focus(); }, 320);
+    }
+    return ok;
+  }
+
+  /* ---------- 组装订单文本 ---------- */
+  function buildOrder(){
+    var plan = getPlan();
+    var p = PLANS[plan];
+    var qty = parseInt($("qty").value,10) || 1;
+    var total = p.price * qty;
+    var count = p.count * qty;
+
+    var data = {
+      name:   $("name").value.trim(),
+      dorm:   $("dorm").value.trim(),
+      room:   $("room").value.trim(),
+      contact:$("contact").value.trim(),
+      flavor: $("flavor").value,
+      plan:   p.label,
+      qty:    qty,
+      count:  count,
+      fulfill:form.querySelector('input[name="fulfill"]:checked').value,
+      slot:   $("slot").value,
+      note:   $("note").value.trim(),
+      total:  total
+    };
+
+    var lines = [];
+    lines.push("【小灶手作 · 订货单】");
+    lines.push("姓名/昵称：" + data.name);
+    lines.push("取货方式：" + data.fulfill + "（宿舍楼 " + data.dorm + " 房间 " + data.room + "）");
+    lines.push("口味：" + data.flavor);
+    lines.push("规格：" + data.plan + " × " + data.qty + " 份（共 " + data.count + " 个）");
+    lines.push("取货时段：" + data.slot);
+    lines.push("联系方式：" + data.contact);
+    if(data.note) lines.push("备注：" + data.note);
+    lines.push("合计金额：" + money(data.total));
+    lines.push("下单时间：" + new Date().toLocaleString("zh-CN"));
+    lines.push("（已确认：前一日 21:00 前下单，逾期顺延）");
+
+    data.text = lines.join("\n");
+    return data;
+  }
+
+  /* ---------- 渲染成功面板 ---------- */
+  function renderSheet(d){
+    $("r-name").textContent   = d.name;
+    $("r-dorm").textContent   = d.dorm + " 房间 " + d.room;
+    $("r-ful").textContent    = d.fulfill;
+    $("r-flavor").textContent = d.flavor;
+    $("r-plan").textContent   = d.plan;
+    $("r-qty").textContent    = d.qty + " 份（共 " + d.count + " 个）";
+    $("r-slot").textContent   = d.slot;
+    $("r-contact").textContent= d.contact;
+    $("r-note").textContent   = d.note ? d.note : "无";
+    $("r-total").textContent  = money(d.total);
+    $("copyText").textContent = d.text;
+  }
+
+  /* ---------- 提交 ---------- */
+  $("submitBtn").addEventListener("click", function(){
+    if(!validate()){
+      // 校验失败：轻微震动反馈（若支持）
+      if(navigator.vibrate) navigator.vibrate(60);
+      return;
+    }
+    var d = buildOrder();
+    renderSheet(d);
+    $("copiedTip").classList.remove("show");
+    $("overlay").classList.add("show");
+    document.body.style.overflow = "hidden";
+    $("overlay").scrollTop = 0;
+  });
+
+  /* ---------- 复制 ---------- */
+  function doCopy(){
+    var text = $("copyText").textContent;
+    var done = function(){
+      $("copiedTip").classList.add("show");
+      setTimeout(function(){ $("copiedTip").classList.remove("show"); }, 2600);
+    };
+
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text, done); });
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+  function fallbackCopy(text, cb){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly","");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); cb(); } catch(e){ alert("复制失败，请长按上方文本框手动复制"); }
+    document.body.removeChild(ta);
+  }
+  $("copyBtn").addEventListener("click", doCopy);
+
+  /* ---------- 关闭 / 返回修改 ---------- */
+  function closeSheet(){
+    $("overlay").classList.remove("show");
+    document.body.style.overflow = "";
+  }
+  $("editBtn").addEventListener("click", closeSheet);
+
+  /* ---------- 再下一单：重置 ---------- */
+  $("againBtn").addEventListener("click", function(){
+    form.reset();
+    form.querySelectorAll(".opt").forEach(function(o){ o.classList.remove("sel"); });
+    document.querySelectorAll(".errtip").forEach(function(t){ t.classList.remove("show"); });
+    document.querySelectorAll("input,select,textarea").forEach(function(i){ i.classList.remove("bad"); });
+    refresh();
+    closeSheet();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+
+  /* 点击遮罩关闭 */
+  $("overlay").addEventListener("click", function(e){
+    if(e.target === this) closeSheet();
+  });
+
+  /* 初始化 */
+  refresh();
+})();
+</script>
+</body>
+</html>

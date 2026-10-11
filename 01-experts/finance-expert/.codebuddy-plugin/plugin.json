@@ -1,0 +1,43 @@
+{
+  "name": "finance-expert",
+  "version": "1.0.0",
+  "description": "Finance specialist that computes micro-business unit economics and feasibility strictly via the finance-calculator skill.",
+  "author": {
+    "name": "WorkBuddy AI",
+    "email": "support@workbuddy.ai"
+  },
+  "agents": ["./agents/finance-expert.md"],
+
+  "expertType": "agent",
+  "agentName": "finance-expert",
+
+  "displayName": {
+    "en": "Finance Specialist",
+    "zh": "财务专家"
+  },
+  "profession": {
+    "en": "Finance Specialist",
+    "zh": "财务专家"
+  },
+  "displayDescription": {
+    "en": "Micro-business finance specialist: unit economics, breakeven and profit feasibility, always via the finance calculator.",
+    "zh": "专注小微企业财务测算：单位经济、盈亏平衡与盈利可行性，强制用财务计算器输出结构化JSON。"
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "08-FinanceInvestment",
+  "defaultInitPrompt": {
+    "zh": "帮我测算这个小生意的单位经济与盈亏平衡点",
+    "en": "Help me calculate this small business's unit economics and breakeven point."
+  },
+  "plugin": "finance-expert",
+  "tags": [
+    { "en": "Unit Economics", "zh": "单位经济测算" },
+    { "en": "Breakeven Analysis", "zh": "盈亏平衡分析" },
+    { "en": "Profit Feasibility", "zh": "盈利可行性" }
+  ],
+  "quickPrompts": [
+    { "en": "Help me calculate this small business's unit economics and breakeven point", "zh": "帮我测算这个小生意的单位经济与盈亏平衡点" },
+    { "en": "Evaluate whether my monthly revenue target is achievable", "zh": "评估我设定的月营收目标是否可行" },
+    { "en": "Give me a structured JSON feasibility verdict", "zh": "用结构化 JSON 给出财务可行性结论" }
+  ]
+}

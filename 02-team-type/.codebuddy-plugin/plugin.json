@@ -1,0 +1,99 @@
+{
+  "name": "campusbiz-orchestrator",
+  "version": "1.0.0",
+  "description": "Orchestrates a four-expert micro-business team (finance, demand, growth, operations) into one validated, feasible campus business execution plan.",
+  "author": {
+    "name": "CampusBiz",
+    "email": "campusbiz@example.com"
+  },
+  "agents": [
+    "./agents/campusbiz-orchestrator-team-lead.md",
+    "./agents/finance-expert.md",
+    "./agents/demand-expert.md",
+    "./agents/growth-expert.md",
+    "./agents/operations-expert.md"
+  ],
+
+  "expertType": "team",
+  "agentName": "campusbiz-orchestrator-team-lead",
+  "teamInfo": {
+    "leadAgent": "campusbiz-orchestrator-team-lead",
+    "memberAgents": ["finance-expert", "demand-expert", "growth-expert", "operations-expert"]
+  },
+
+  "displayName": {
+    "en": "CampusBiz Orchestrator",
+    "zh": "CampusBiz Orchestrator"
+  },
+  "profession": {
+    "en": "CampusBiz Orchestrator",
+    "zh": "CampusBiz Orchestrator"
+  },
+  "displayDescription": {
+    "en": "Campus micro-business strategy team: one orchestrator decomposes your goal into finance, demand, growth and operations workstreams, then cross-validates them into a single executable plan.",
+    "zh": "校园小微创业策略团：主理人拆解经营目标，调度财务、需求、增长、运营专家并行测算，校验可行性出方案。"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "zh": "我有一个校园小生意的想法，帮我拆解成财务、需求、增长、运营方案并校验可行性",
+    "en": "I have a campus micro-business idea. Break it into finance, demand, growth and operations plans, then validate feasibility."
+  },
+  "plugin": "campusbiz-orchestrator",
+  "tags": [
+    { "en": "Business Orchestration", "zh": "创业团队调度" },
+    { "en": "Feasibility Cross-check", "zh": "可行性交叉校验" },
+    { "en": "Campus Micro-business", "zh": "校园小微创业" }
+  ],
+  "quickPrompts": [
+    {
+      "en": "I have a campus micro-business idea. Break it into finance, demand, growth and operations plans, then validate feasibility.",
+      "zh": "我有一个校园小生意的想法，帮我拆解成财务、需求、增长、运营方案并校验可行性"
+    },
+    {
+      "en": "Run the cookie scenario: I sell cookies on campus at 5 yuan each, want to earn 6,000 yuan a month, and can bake 40 cookies a day.",
+      "zh": "跑一遍曲奇饼干场景：我在校内卖曲奇，5元一块，想月入6000元，每天最多做40块"
+    },
+    {
+      "en": "Cross-check whether my target income is realistic given my production capacity and estimated daily demand.",
+      "zh": "交叉检查我的收入目标在产能和预估日需求下是否现实"
+    }
+  ],
+  "members": [
+    {
+      "id": "campusbiz-orchestrator-team-lead",
+      "displayName": { "en": "Bryan Zheng", "zh": "正合吾" },
+      "profession": { "en": "Business Orchestrator", "zh": "创业统筹官" },
+      "avatar": "avatars/campusbiz-orchestrator-team-lead.png",
+      "role": "lead"
+    },
+    {
+      "id": "finance-expert",
+      "displayName": { "en": "Fiona Suan", "zh": "算得清" },
+      "profession": { "en": "Finance Specialist", "zh": "财务专家" },
+      "avatar": "avatars/finance-expert.png",
+      "role": "member"
+    },
+    {
+      "id": "demand-expert",
+      "displayName": { "en": "Qiu Zhiben", "zh": "丘知本" },
+      "profession": { "en": "Demand Analyst", "zh": "需求分析师" },
+      "avatar": "avatars/demand-expert.png",
+      "role": "member"
+    },
+    {
+      "id": "growth-expert",
+      "displayName": { "en": "Zhang Shengyi", "zh": "张声艺" },
+      "profession": { "en": "Growth Marketer", "zh": "增长营销专家" },
+      "avatar": "avatars/growth-expert.png",
+      "role": "member"
+    },
+    {
+      "id": "operations-expert",
+      "displayName": { "en": "Yun Zhuanzhuan", "zh": "运转安" },
+      "profession": { "en": "Operations Planner", "zh": "运营计划专家" },
+      "avatar": "avatars/operations-expert.png",
+      "role": "member"
+    }
+  ]
+}

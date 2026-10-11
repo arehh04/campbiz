@@ -1,0 +1,31 @@
+{
+  "name": "my-experts",
+  "description": "my-experts marketplace (auto-generated)",
+  "plugins": [
+    {
+      "name": "finance-expert",
+      "source": "./plugins/finance-expert",
+      "description": "Finance specialist that computes micro-business unit economics and feasibility strictly via the finance-calculator skill."
+    },
+    {
+      "name": "demand-expert",
+      "source": "./plugins/demand-expert",
+      "description": "Market demand analyst that estimates daily demand from sales history and clearly labels simulated data."
+    },
+    {
+      "name": "growth-expert",
+      "source": "./plugins/growth-expert",
+      "description": "Launch-ready marketing asset creator that generates real files via the artifact-generator skill for micro-businesses."
+    },
+    {
+      "name": "operations-expert",
+      "source": "./plugins/operations-expert",
+      "description": "Daily operations planner for micro-businesses that respects capacity limits and returns structured plans."
+    },
+    {
+      "name": "campusbiz-orchestrator",
+      "source": "./plugins/campusbiz-orchestrator",
+      "description": "Orchestrates a four-expert micro-business team (finance, demand, growth, operations) into one validated, feasible campus business execution plan."
+    }
+  ]
+}

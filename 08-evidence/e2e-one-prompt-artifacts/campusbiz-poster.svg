@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-label="Hostel Crumb Co. homemade cookies — RM5.00 per box, delivered to your hostel block 16:00 to 19:00">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff4e8"/>
+      <stop offset="55%" stop-color="#ffe9d6"/>
+      <stop offset="100%" stop-color="#ffe2cf"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c0392b"/>
+      <stop offset="100%" stop-color="#e0632f"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#a35b2a" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="1200" fill="url(#bg)"/>
+
+  <!-- Top ribbon -->
+  <rect x="0" y="0" width="900" height="84" fill="url(#ribbon)"/>
+  <text x="450" y="55" font-family="Segoe UI, Arial, sans-serif" font-size="30"
+        font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="3">
+    HOSTEL CRUMB CO. · NEW ON CAMPUS
+  </text>
+
+  <!-- Brand -->
+  <text x="450" y="190" font-family="Segoe UI, Arial, sans-serif" font-size="66"
+        font-weight="800" fill="#2b231c" text-anchor="middle">Freshly Baked</text>
+  <text x="450" y="265" font-family="Segoe UI, Arial, sans-serif" font-size="66"
+        font-weight="800" fill="#c0392b" text-anchor="middle">Homemade Cookies</text>
+
+  <text x="450" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="28"
+        fill="#6f6a62" text-anchor="middle">
+    Baked in small batches · Delivered to your hostel block
+  </text>
+
+  <!-- Price card -->
+  <g filter="url(#soft)">
+    <rect x="150" y="372" width="600" height="250" rx="34" fill="#ffffff" stroke="#f0e2d4" stroke-width="2"/>
+  </g>
+  <text x="450" y="470" font-family="Segoe UI, Arial, sans-serif" font-size="30"
+        font-weight="700" fill="#6f6a62" text-anchor="middle" letter-spacing="4">JUST</text>
+  <text x="450" y="580" font-family="Segoe UI, Arial, sans-serif" font-size="118"
+        font-weight="800" fill="#c0392b" text-anchor="middle">RM5.00</text>
+  <text x="450" y="615" font-family="Segoe UI, Arial, sans-serif" font-size="30"
+        font-weight="700" fill="#1f7a4d" text-anchor="middle" letter-spacing="2">PER BOX</text>
+
+  <!-- Cookie illustration -->
+  <g transform="translate(450,720)">
+    <circle r="96" fill="#e9a95f"/>
+    <circle r="96" fill="none" stroke="#d68f3f" stroke-width="6"/>
+    <g fill="#6b3f22">
+      <circle cx="-40" cy="-30" r="12"/>
+      <circle cx="28" cy="-44" r="10"/>
+      <circle cx="48" cy="18" r="13"/>
+      <circle cx="-18" cy="40" r="11"/>
+      <circle cx="-52" cy="14" r="9"/>
+      <circle cx="6" cy="4" r="10"/>
+    </g>
+  </g>
+
+  <!-- Features -->
+  <text x="450" y="890" font-family="Segoe UI, Arial, sans-serif" font-size="30"
+        font-weight="700" fill="#2b231c" text-anchor="middle">
+    Up to 40 boxes a day · 4 flavours
+  </text>
+  <text x="450" y="936" font-family="Segoe UI, Arial, sans-serif" font-size="28"
+        fill="#6f6a62" text-anchor="middle">
+    Choc Chip · Double Chocolate · Oat &amp; Raisin · Peanut Butter
+  </text>
+
+  <!-- Info strip -->
+  <rect x="120" y="980" width="660" height="120" rx="26" fill="#e8f5ee" stroke="#cdeada" stroke-width="2"/>
+  <text x="450" y="1028" font-family="Segoe UI, Arial, sans-serif" font-size="26"
+        font-weight="700" fill="#1f7a4d" text-anchor="middle">
+    Order by 14:00 · Delivered 16:00 – 19:00
+  </text>
+  <text x="450" y="1072" font-family="Segoe UI, Arial, sans-serif" font-size="26"
+        font-weight="700" fill="#1f7a4d" text-anchor="middle">
+    WhatsApp us · Pay by DuitNow
+  </text>
+
+  <!-- Footer CTA -->
+  <rect x="0" y="1130" width="900" height="70" fill="#c0392b"/>
+  <text x="450" y="1175" font-family="Segoe UI, Arial, sans-serif" font-size="28"
+        font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="2">
+    HOSTEL CRUMB CO. · RM5.00/BOX · ORDER ON WHATSAPP
+  </text>
+</svg>

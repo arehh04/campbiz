@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hostel Crumb Co. · Homemade Cookies · RM5.00/box</title>
+<style>
+  :root{
+    --bg:#fbf7f2;
+    --card:#ffffff;
+    --ink:#22201d;
+    --muted:#6f6a62;
+    --brand:#c0392b;        /* warm red accent */
+    --brand-dark:#a5311f;
+    --green:#1f7a4d;        /* fresh green accent */
+    --green-soft:#e8f5ee;
+    --line:#efe7dd;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
+                "Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:18px 16px 128px;}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(135deg,#fff3e6 0%,#ffe6d6 55%,#ffe9dc 100%);
+    border:1px solid #f3ded0;
+    border-radius:var(--radius);
+    padding:26px 20px 24px;
+    box-shadow:0 10px 26px rgba(160,90,50,.10);
+  }
+  .brand{
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brand);font-weight:700;
+  }
+  .hero h1{font-size:27px;line-height:1.25;margin:8px 0 8px;font-weight:800;color:#2b231c;}
+  .hero p{font-size:15px;color:var(--muted);}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .badge{
+    font-size:12px;font-weight:700;padding:6px 11px;border-radius:999px;
+    background:#fff;border:1px solid var(--line);color:var(--ink);
+  }
+  .badge.green{background:var(--green-soft);border-color:#cdeada;color:var(--green);}
+
+  /* CARDS */
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:20px;margin-top:14px;
+    box-shadow:0 2px 10px rgba(60,40,20,.04);
+  }
+  .card h2{font-size:16px;margin-bottom:10px;color:#2b231c;}
+  .card p{color:var(--muted);font-size:15px;}
+
+  /* PRICE */
+  .price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .price{font-size:40px;font-weight:800;color:var(--brand);letter-spacing:-.01em;}
+  .price-note{color:var(--muted);font-size:13px;}
+  .meta{margin-top:14px;display:grid;gap:9px;}
+  .meta div{display:flex;gap:10px;font-size:14px;}
+  .meta .k{color:var(--muted);min-width:104px;}
+  .meta .v{color:var(--ink);font-weight:600;}
+
+  /* FLAVOURS */
+  .flavours{display:grid;gap:10px;margin-top:4px;}
+  .flavour{
+    display:flex;align-items:center;gap:12px;
+    border:1px solid var(--line);border-radius:14px;padding:12px 14px;
+    background:#fffdfa;
+  }
+  .dot{
+    width:34px;height:34px;border-radius:50%;flex:0 0 34px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:17px;background:#fdeee0;
+  }
+  .flavour b{display:block;font-size:14.5px;color:#2b231c;}
+  .flavour span{display:block;font-size:12.5px;color:var(--muted);}
+  .flavour .tag{margin-left:auto;font-size:12px;font-weight:700;color:var(--green);white-space:nowrap;}
+
+  /* STEPS */
+  ol.steps{margin-left:18px;color:var(--muted);font-size:14.5px;display:grid;gap:6px;}
+  ol.steps b{color:var(--ink);}
+
+  /* CTA */
+  .cta{
+    position:fixed;left:0;right:0;bottom:0;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  }
+  .cta-inner{max-width:520px;margin:0 auto;display:grid;gap:8px;grid-template-columns:1fr 1fr;}
+  .btn{
+    display:block;text-align:center;text-decoration:none;
+    border-radius:14px;padding:15px 12px;font-size:16px;font-weight:700;
+    transition:transform .12s ease,background .12s ease;
+  }
+  .btn:active{transform:scale(.985);}
+  .btn-wa{background:var(--green);color:#fff;}
+  .btn-wa:active{background:#176138;}
+  .btn-pay{background:var(--brand);color:#fff;}
+  .btn-pay:active{background:var(--brand-dark);}
+  .cta small{grid-column:1/-1;display:block;text-align:center;color:var(--muted);font-size:12px;}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;}
+  .fineprint{text-align:center;color:#9a938a;font-size:11.5px;margin-top:8px;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="brand">Hostel Crumb Co.</div>
+      <h1>Freshly baked cookies,<br>delivered to your hostel block.</h1>
+      <p>Small-batch homemade cookies — baked on campus, boxed warm, and dropped off right at your block. Just RM5.00 a box.</p>
+      <div class="badges">
+        <span class="badge">RM5.00 / box</span>
+        <span class="badge green">Up to 40 boxes a day</span>
+        <span class="badge">Delivery 16:00–19:00</span>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>What you're getting</h2>
+      <p>Each box is packed with freshly baked, soft-centred cookies made in small batches — not mass-produced. Baked with real butter and good chocolate, sealed while still fresh, and handed to you the same day. No preservatives, no fuss — just a proper sweet treat between classes.</p>
+    </section>
+
+    <section class="card">
+      <h2>Pick your flavour</h2>
+      <div class="flavours">
+        <div class="flavour">
+          <span class="dot">🍫</span>
+          <div><b>Classic Choc Chip</b><span>Buttery dough, generous chocolate chunks</span></div>
+          <span class="tag">Bestseller</span>
+        </div>
+        <div class="flavour">
+          <span class="dot">🤎</span>
+          <div><b>Double Chocolate</b><span>Rich cocoa dough with melty choc chips</span></div>
+        </div>
+        <div class="flavour">
+          <span class="dot">🌾</span>
+          <div><b>Oat &amp; Raisin</b><span>Chewy oats with plump raisins</span></div>
+        </div>
+        <div class="flavour">
+          <span class="dot">🥜</span>
+          <div><b>Peanut Butter</b><span>Soft, nutty, melt-in-your-mouth centre</span></div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:13.5px;">Every box is <b>RM5.00</b> — mix and match flavours in one order. Tell us your picks on WhatsApp.</p>
+    </section>
+
+    <section class="card">
+      <h2>Price</h2>
+      <div class="price-row">
+        <span class="price">RM5.00</span>
+        <span class="price-note">per box · student-friendly, no surprises</span>
+      </div>
+      <div class="meta">
+        <div><span class="k">Order cutoff</span><span class="v">14:00 daily</span></div>
+        <div><span class="k">Delivery window</span><span class="v">16:00 – 19:00</span></div>
+        <div><span class="k">Daily capacity</span><span class="v">Up to 40 boxes</span></div>
+        <div><span class="k">Bundles</span><span class="v">5 boxes = RM25.00 · 10 boxes = RM50.00</span></div>
+      </div>
+    </section>
+
+    <section class="card" id="order">
+      <h2>How to order</h2>
+      <ol class="steps">
+        <li><b>WhatsApp us</b> your name, hostel block &amp; the flavours you want (and how many boxes).</li>
+        <li><b>Pay via DuitNow</b> — we'll send the QR / transfer details once your order is confirmed.</li>
+        <li><b>Get it delivered</b> to your block between <b>16:00 and 19:00</b> the same day.</li>
+      </ol>
+      <p style="margin-top:12px;font-size:13.5px;">Orders in by <b>14:00</b> get delivered today. Later orders roll to the next day — so get in early, boxes sell out fast.</p>
+    </section>
+
+    <section class="card">
+      <h2>Good to know</h2>
+      <p style="font-size:14px;">· Orders close at <b>14:00 daily</b>, delivered <b>16:00–19:00</b>.<br>
+      · We bake a maximum of <b>40 boxes a day</b> — first come, first served.<br>
+      · Pay by <b>DuitNow</b> (bank transfer / e-wallet) on confirmation.<br>
+      · Have an allergy or special request? Just tell us on WhatsApp.</p>
+    </section>
+
+    <footer>Hostel Crumb Co. · Homemade cookies, made on campus</footer>
+    <div class="fineprint">Cookies are made in small batches. Prices and availability are as listed above.</div>
+  </div>
+
+  <div class="cta">
+    <div class="cta-inner">
+      <a class="btn btn-wa" href="https://wa.me/60123456789?text=Hi%20Hostel%20Crumb%20Co.%2C%20I%27d%20like%20to%20order%20cookies%20(RM5.00%2Fbox)">Order on WhatsApp</a>
+      <a class="btn btn-pay" href="#order">Pay via DuitNow</a>
+      <small>RM5.00/box · Orders close 14:00 · Delivered 16:00–19:00</small>
+    </div>
+  </div>
+</body>
+</html>

@@ -61,11 +61,20 @@ Root: campusbiz-hackathon-submission
 07-docs/README.md                                             11700 B  2769190e10026a77
 07-docs/WIRING-WORKBUDDY2API.md                                5548 B  a4fa1361c6b14d0d
 08-evidence/VERIFICATION.md                                    4422 B  848aae974da020e7
+08-evidence/E2E-ONE-PROMPT-EVIDENCE.md                          5198 B  b73b5fff03632989
+08-evidence/e2e-one-prompt-artifacts/CampusBiz-Cookie-Business-Plan.md  10535 B  c1a09ce288f6fc21
+08-evidence/e2e-one-prompt-artifacts/campusbiz-7-day-marketing-calendar.md  6265 B  7d1e3bad56b4e443
+08-evidence/e2e-one-prompt-artifacts/campusbiz-landing-page.html  8430 B  8e91fb869c33312c
+08-evidence/e2e-one-prompt-artifacts/campusbiz-poster.svg        4126 B  de6e736c7c21c02b
 README.md                                                      7273 B  6ed90e941eb0d7b1
 _mk.py                                                         1271 B  a16e5d0b16d75b6d
 ```
 
 ## Totals
 
-- Files: 57
-- Total size: 379.4 KB
+- Files: 62
+- Total size: ~425 KB
+
+> Added 2026-10-11: `E2E-ONE-PROMPT-EVIDENCE.md` plus 4 attachment artifacts under
+> `e2e-one-prompt-artifacts/` — evidence for the "one prompt, one goal,
+> end-to-end execution" criterion.

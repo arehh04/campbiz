@@ -39,7 +39,7 @@ For the cookie scenario the live model returned:
 | `05-dashboard/` | `campusbiz-live.html` — single-file live agent-office dashboard. |
 | `06-server/` | `bridge-server.js` — zero-dependency Node bridge, bridge configs, and the **one-click launchers** (`START-CAMPUSBIZ.bat`, `start-campusbiz.sh`). |
 | `07-docs/` | Full setup, wiring, and troubleshooting documentation. |
-| `08-evidence/` | Verification record and file manifest with SHA-256 checksums. |
+| `08-evidence/` | Verification record and file manifest with SHA-256 checksums. Includes [`E2E-ONE-PROMPT-EVIDENCE.md`](08-evidence/E2E-ONE-PROMPT-EVIDENCE.md) — proof of **one prompt → one goal → end-to-end execution**. |
 
 ---
 
